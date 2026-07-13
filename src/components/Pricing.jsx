@@ -41,7 +41,7 @@ function Pricing() {
             <li><FaCheckCircle /> Priority Support</li>
           </ul>
 
-          <button>Choose Plan</button>
+          <button className="price-btn">Choose Plan</button>
         </div>
 
         <div className="price-card">
