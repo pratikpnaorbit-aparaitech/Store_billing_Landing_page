@@ -1,63 +1,111 @@
+import "./Pricing.css";
 import { FaCheckCircle } from "react-icons/fa";
 
 function Pricing() {
+  const plans = [
+    {
+      title: "Basic",
+      price: "₹499",
+      duration: "/month",
+      description: "Perfect for small shops",
+      features: [
+        "GST Billing",
+        "Inventory Management",
+        "100 Customers",
+        "Sales Reports",
+      ],
+      popular: false,
+    },
+    {
+      title: "Professional",
+      price: "₹999",
+      duration: "/month",
+      description: "Best for growing businesses",
+      features: [
+        "Unlimited GST Billing",
+        "Inventory + Barcode",
+        "Unlimited Customers",
+        "Advanced Reports",
+        "Cloud Backup",
+        "Priority Support",
+      ],
+      popular: true,
+    },
+    {
+      title: "Enterprise",
+      price: "₹1999",
+      duration: "/month",
+      description: "For large businesses",
+      features: [
+        "Everything in Professional",
+        "Multi Branch",
+        "Employee Management",
+        "Custom Reports",
+        "API Access",
+        "24×7 Premium Support",
+      ],
+      popular: false,
+    },
+  ];
+
   return (
-    <section className="pricing" id="pricing">
+    <section id="pricing" className="pricing">
 
-      <div className="section-title">
-        <h2>Choose Your Plan</h2>
-        <p>Flexible pricing for every business.</p>
-      </div>
+      <span className="pricing-tag">
+        💳 Pricing Plans
+      </span>
 
-      <div className="pricing-grid">
+      <h2>Choose the Perfect Plan</h2>
 
-        <div className="price-card">
-          <h3>Basic</h3>
-          <h1>₹499</h1>
-          <span>/month</span>
+      <p className="pricing-subtitle">
+        Flexible pricing for every business. Upgrade anytime as your business grows.
+      </p>
 
-          <ul>
-            <li><FaCheckCircle /> Billing</li>
-            <li><FaCheckCircle /> Inventory</li>
-            <li><FaCheckCircle /> Customer Records</li>
-            <li><FaCheckCircle /> Email Support</li>
-          </ul>
+      <div className="pricing-container">
 
-          <button>Choose Plan</button>
-        </div>
+        {plans.map((plan, index) => (
 
-        <div className="price-card popular">
-          <div className="badge">Most Popular</div>
+          <div
+            key={index}
+            className={plan.popular ? "price-card popular" : "price-card"}
+          >
 
-          <h3>Professional</h3>
-          <h1>₹999</h1>
-          <span>/month</span>
+            {plan.popular && (
+              <div className="popular-badge">
+                Most Popular
+              </div>
+            )}
 
-          <ul>
-            <li><FaCheckCircle /> Unlimited Billing</li>
-            <li><FaCheckCircle /> GST Reports</li>
-            <li><FaCheckCircle /> Inventory</li>
-            <li><FaCheckCircle /> Analytics</li>
-            <li><FaCheckCircle /> Priority Support</li>
-          </ul>
+            <h3>{plan.title}</h3>
 
-          <button className="price-btn">Choose Plan</button>
-        </div>
+            <div className="price">
+              {plan.price}
+              <span>{plan.duration}</span>
+            </div>
 
-        <div className="price-card">
-          <h3>Enterprise</h3>
-          <h1>₹1999</h1>
-          <span>/month</span>
+            <p className="price-desc">
+              {plan.description}
+            </p>
 
-          <ul>
-            <li><FaCheckCircle /> Everything Included</li>
-            <li><FaCheckCircle /> Multi Store</li>
-            <li><FaCheckCircle /> Cloud Backup</li>
-            <li><FaCheckCircle /> Team Access</li>
-          </ul>
+            <ul className="price-features">
 
-          <button>Choose Plan</button>
-        </div>
+              {plan.features.map((feature, i) => (
+
+                <li key={i}>
+                  <FaCheckCircle color="#22c55e" /> {feature}
+                </li>
+
+              ))}
+
+            </ul>
+
+            <a href="#contact" className="price-btn">
+              Get Started
+            </a>
+
+          </div>
+
+        ))}
 
       </div>
 

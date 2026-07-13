@@ -1,11 +1,12 @@
+import "./Footer.css";
 import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
   FaTwitter,
-  FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 function Footer() {
@@ -15,75 +16,134 @@ function Footer() {
       <div className="footer-container">
 
         {/* Company */}
+        <div className="footer-logo">
 
-        <div className="footer-box">
-          <h2>SmartBilling</h2>
+          <h2>
+            Smart<span>Billing</span>
+          </h2>
 
           <p>
-            Smart Billing helps businesses manage billing,
-            inventory, customers and reports efficiently.
+            Smart Billing System helps retailers,
+            wholesalers and businesses manage
+            billing, inventory, GST invoices,
+            customers and reports with ease.
           </p>
 
-          <div className="social-icons">
-            <FaFacebookF />
-            <FaInstagram />
-            <FaLinkedinIn />
-            <FaTwitter />
+          <div className="footer-social">
+
+            <a href="#">
+              <FaFacebookF />
+            </a>
+
+            <a href="#">
+              <FaInstagram />
+            </a>
+
+            <a href="#">
+              <FaLinkedinIn />
+            </a>
+
+            <a href="#">
+              <FaTwitter />
+            </a>
+
           </div>
+
         </div>
 
         {/* Quick Links */}
-
-        <div className="footer-box">
+        <div className="footer-links">
 
           <h3>Quick Links</h3>
 
           <ul>
-            <li>Home</li>
-            <li>Features</li>
-            <li>About</li>
-            <li>Pricing</li>
-            <li>Contact</li>
+
+            <li>
+              <a href="#home">Home</a>
+            </li>
+
+            <li>
+              <a href="#features">Features</a>
+            </li>
+
+            <li>
+              <a href="#about">About</a>
+            </li>
+
+            <li>
+              <a href="#pricing">Pricing</a>
+            </li>
+
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+
           </ul>
 
         </div>
 
         {/* Services */}
-
-        <div className="footer-box">
+        <div className="footer-services">
 
           <h3>Services</h3>
 
           <ul>
-            <li>Billing</li>
-            <li>Inventory</li>
-            <li>Reports</li>
-            <li>GST Invoice</li>
-            <li>Cloud Backup</li>
+
+            <li>
+              <a href="#">GST Billing</a>
+            </li>
+
+            <li>
+              <a href="#">Inventory</a>
+            </li>
+
+            <li>
+              <a href="#">Reports</a>
+            </li>
+
+            <li>
+              <a href="#">Cloud Backup</a>
+            </li>
+
+            <li>
+              <a href="#">Customer Management</a>
+            </li>
+
           </ul>
 
         </div>
 
         {/* Contact */}
-
-        <div className="footer-box">
+        <div className="footer-contact">
 
           <h3>Contact</h3>
 
-          <p><FaMapMarkerAlt /> Pune, Maharashtra</p>
+          <ul>
 
-          <p><FaPhoneAlt /> +91 9876543210</p>
+            <li>
+              <FaMapMarkerAlt /> Pune, Maharashtra
+            </li>
 
-          <p><FaEnvelope /> support@smartbilling.com</p>
+            <li>
+              <FaPhoneAlt /> +91 98765 43210
+            </li>
+
+            <li>
+              <FaEnvelope /> support@smartbilling.com
+            </li>
+
+          </ul>
 
         </div>
 
       </div>
 
-      <hr />
+      <div className="footer-bottom">
 
-      <div className="copyright">
-        © 2026 SmartBilling. All Rights Reserved.
+        <p>
+          © 2026 Smart Billing System. All Rights Reserved.
+        </p>
+
       </div>
 
     </footer>

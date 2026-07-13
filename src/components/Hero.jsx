@@ -1,66 +1,85 @@
-import CountUp from "react-countup";
+import "./Hero.css";
 import { TypeAnimation } from "react-type-animation";
 function Hero() {
   return (
-    <section className="hero">
-
+   <section id="home" className="hero">
       
-      {/* Animated Blobs */}
-  <div className="blob blob1"></div>
-  <div className="blob blob2"></div>
-  <div className="blob blob3"></div>
+     {/* Left Side */}
+<div className="hero-content">
+        <span className="hero-tag">
+          🚀 India's Smart Billing Software
+        </span>
 
-      <div className="hero-content">
+        <h1 className="hero-title">
+          <TypeAnimation
+            sequence={["Smart Billing\nSystem", 3000]}
+            wrapper="span"
+            speed={40}
+            repeat={Infinity}
+            style={{ whiteSpace: "pre-line" }}
+          />
+        </h1>
 
-        
-<h1 className="hero-title">
-  <TypeAnimation
-    sequence={[
-      "Smart Billing\nSystem",
-      3000,
-    ]}
-    wrapper="span"
-    speed={40}
-    repeat={Infinity}
-    style={{ whiteSpace: "pre-line" }}
-  />
-</h1>
-
-        <p>
-          Manage invoices, customers,
-          inventory and reports in one
-          powerful platform.
+        <p className="hero-text">
+          Manage Billing, GST, Inventory, Customers and Reports
+          from one powerful dashboard designed for modern businesses.
         </p>
 
         <div className="hero-btns">
           <button className="primary">
-            Get Started
+            Get Started →
           </button>
 
           <button className="secondary">
-            Learn More
+            ▶ Live Demo
           </button>
         </div>
 
+        <div className="hero-rating">
+          <div className="rating-box">
+            ⭐⭐⭐⭐⭐
+          </div>
+
+          <div className="rating-text">
+            <h4>4.9/5 Rating</h4>
+            <p>Trusted by 500+ Businesses</p>
+          </div>
+        </div>
       </div>
-<div className="floating-card sales-card">
-  <h3>Today's Sales</h3>
-<h2>₹54,231</h2>
-  <span>+12.5% This Month</span>
-</div>
 
-<div className="floating-card customer-card">
-  <h3>Customers</h3>
- <h2>1,423</h2>
-  <span>+15.3% Growth</span>
-</div>
+      {/* Right Side */}
+      <div className="hero-image">
+        <img
+          src="/dashboard.png"
+          alt="Smart Billing Dashboard"
+        />
 
-<div className="floating-card invoice-card">
-  <h3>Invoices</h3>
-  <h2>245</h2>
-  <span>18 Pending</span>
-</div>
+        <div className="dashboard-grid">
+          <div className="dash-box">
+            <h4>Revenue</h4>
+            <h2>₹54,231</h2>
+            <p>+12.5%</p>
+          </div>
 
+          <div className="dash-box">
+            <h4>Customers</h4>
+            <h2>1,423</h2>
+            <p>+15%</p>
+          </div>
+
+          <div className="dash-box">
+            <h4>Orders</h4>
+            <h2>245</h2>
+            <p>18 Pending</p>
+          </div>
+
+          <div className="dash-box">
+            <h4>Inventory</h4>
+            <h2>89%</h2>
+            <p>Healthy Stock</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

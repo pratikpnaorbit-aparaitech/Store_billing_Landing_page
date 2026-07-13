@@ -1,77 +1,130 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "./Features.css";
+
 import {
   FaFileInvoiceDollar,
-  FaChartLine,
-  FaBoxOpen,
+  FaBoxes,
   FaUsers,
-  FaShieldAlt,
+  FaChartLine,
   FaMobileAlt,
+  FaCloud,
 } from "react-icons/fa";
 
+
 function Features() {
+
+  const features = [
+    {
+      icon: <FaFileInvoiceDollar />,
+      title: "Smart GST Billing",
+      description:
+        "Generate GST invoices quickly with automatic tax calculations.",
+    },
+    {
+      icon: <FaBoxes />,
+      title: "Inventory Management",
+      description:
+        "Track stock levels, purchases, and sales in real time.",
+    },
+    {
+      icon: <FaUsers />,
+      title: "Customer Management",
+      description:
+        "Store customer details and purchase history securely.",
+    },
+    {
+      icon: <FaChartLine />,
+      title: "Business Reports",
+      description:
+        "View daily, monthly, and yearly sales reports instantly.",
+    },
+    {
+      icon: <FaMobileAlt />,
+      title: "Mobile Friendly",
+      description:
+        "Access your billing software from any device anytime.",
+    },
+    {
+      icon: <FaCloud />,
+      title: "Cloud Backup",
+      description:
+        "Keep your business data safe with secure cloud backup.",
+    },
+  ];
+
+
+  // Scroll Animation
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
+
   return (
-    <section className="features">
+    <section id="features" className="features">
 
-      <div className="section-title" data-aos="fade-up">
-        <h2>Our Features</h2>
-        <p>
-          Everything you need to manage your business smarter.
+      <div className="container">
+
+        <span className="section-tag">
+          ✨ Features
+        </span>
+
+
+        <h2>
+          Everything Your Business Needs
+        </h2>
+
+
+        <p className="section-text">
+          Powerful billing software packed with smart features to simplify
+          billing, inventory, reports, and customer management.
         </p>
-      </div>
 
-      <div className="feature-grid">
 
-        <div className="feature-card" data-aos="zoom-in" data-aos-delay="100">
-          <FaFileInvoiceDollar className="icon" />
-          <h3>Smart Billing</h3>
-          <p>
-            Generate invoices instantly with GST support.
-          </p>
+
+        <div className="feature-grid">
+
+          {features.map((feature, index) => (
+
+            <div
+              className="feature-card"
+              key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+
+              <div className="feature-icon">
+                {feature.icon}
+              </div>
+
+
+              <h3>
+                {feature.title}
+              </h3>
+
+
+              <p>
+                {feature.description}
+              </p>
+
+
+            </div>
+
+          ))}
+
         </div>
 
-        <div className="feature-card" data-aos="zoom-in" data-aos-delay="200">
-          <FaChartLine className="icon" />
-          <h3>Sales Analytics</h3>
-          <p>
-            Track daily, weekly and monthly sales reports.
-          </p>
-        </div>
-
-        <div className="feature-card" data-aos="zoom-in" data-aos-delay="300">
-          <FaBoxOpen className="icon" />
-          <h3>Inventory</h3>
-          <p>
-            Manage stock automatically and avoid shortages.
-          </p>
-        </div>
-
-        <div className="feature-card" data-aos="zoom-in" data-aos-delay="400">
-          <FaUsers className="icon" />
-          <h3>Customers</h3>
-          <p>
-            Store customer history and purchase details.
-          </p>
-        </div>
-
-        <div className="feature-card" data-aos="zoom-in" data-aos-delay="500">
-          <FaShieldAlt className="icon" />
-          <h3>Secure Data</h3>
-          <p>
-            Cloud backup with complete security.
-          </p>
-        </div>
-
-        <div className="feature-card" data-aos="zoom-in" data-aos-delay="600">
-          <FaMobileAlt className="icon" />
-          <h3>Mobile Friendly</h3>
-          <p>
-            Access your business anywhere on any device.
-          </p>
-        </div>
 
       </div>
 
     </section>
   );
 }
+
 
 export default Features;

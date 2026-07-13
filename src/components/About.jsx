@@ -1,62 +1,71 @@
+import "./About.css";
 import { FaCheckCircle } from "react-icons/fa";
 
 function About() {
   return (
-    <section className="about">
+    <section id="about" className="about">
+      <div className="about-container">
 
-      <div className="about-image">
-        <img
-          src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop"
-          alt="About Smart Billing"
-        />
-      </div>
+        <div className="about-image">
+          <img
+            src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=700"
+            alt="Smart Billing"
+          />
+        </div>
 
-      <div className="about-content">
+        <div className="about-content">
 
-        <span className="about-tag">
-          Why Choose Us
-        </span>
+          <span className="about-tag">
+            About Us
+          </span>
 
-        <h2>
-          Complete Smart Billing Solution For Every Business
-        </h2>
+          <h2>
+            Simplify Your Business Billing with Smart Technology
+          </h2>
 
-        <p>
-          Manage billing, customers, inventory and reports from one
-          powerful dashboard. Save time, reduce mistakes and grow your
-          business faster.
-        </p>
+          <p>
+            Smart Billing System is designed to help retailers,
+            wholesalers, supermarkets and businesses manage
+            billing, inventory, GST invoices and reports from
+            one powerful dashboard.
+          </p>
 
-        <div className="about-list">
+          <ul className="about-list">
 
-          <div>
-            <FaCheckCircle className="check" />
-            Fast Invoice Generation
-          </div>
+            <li>
+              <FaCheckCircle color="#2563eb" />
+              Fast GST Invoice Generation
+            </li>
 
-          <div>
-            <FaCheckCircle className="check" />
-            Inventory Management
-          </div>
+            <li>
+              <FaCheckCircle color="#2563eb" />
+              Real-Time Inventory Tracking
+            </li>
 
-          <div>
-            <FaCheckCircle className="check" />
-            Sales Reports & Analytics
-          </div>
+            <li>
+              <FaCheckCircle color="#2563eb" />
+              Customer & Supplier Management
+            </li>
 
-          <div>
-            <FaCheckCircle className="check" />
-            Secure Cloud Backup
-          </div>
+            <li>
+              <FaCheckCircle color="#2563eb" />
+              Daily & Monthly Reports
+            </li>
+
+            <li>
+              <FaCheckCircle color="#2563eb" />
+              Secure Cloud Backup
+            </li>
+
+          </ul>
+
+          <a href="#pricing" className="about-btn">
+            Explore Plans
+          </a>
 
         </div>
 
-        <button className="primary">
-          Learn More
-        </button>
-
       </div>
-
     </section>
   );
 }

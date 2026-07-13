@@ -1,0 +1,285 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 120px 8%;
+  position: relative;
+  overflow: hidden;
+
+  /* Background Image */
+  background-image:
+    linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
+    url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1920&auto=format&fit=crop");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-image {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 25px;
+}
+
+.hero-title {
+  font-size: 64px;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+.hero-text {
+  color: #dbeafe;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 35px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.primary,
+.secondary {
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .3s;
+  font-weight: 600;
+}
+
+.primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-3px);
+}
+
+.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.secondary:hover {
+  background: white;
+  color: #2563eb;
+}
+
+.hero-rating {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rating-box {
+  background: white;
+  color: #f59e0b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
+
+.rating-text h4 {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.rating-text p {
+  color: #d1d5db;
+  margin: 0;
+}
+
+.hero-image {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.dashboard-grid {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(2, 180px);
+  gap: 18px;
+}
+
+.dash-box {
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  padding: 18px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
+
+.dash-box h4 {
+  color: #64748b;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.dash-box h2 {
+  color: #2563eb;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.dash-box p {
+  color: #16a34a;
+  font-size: 14px;
+}
+
+@media (max-width: 992px) {
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 100px 5%;
+  }
+
+  .hero-title {
+    font-size: 46px;
+  }
+
+  .hero-btns {
+    justify-content: center;
+  }
+
+  .hero-rating {
+    justify-content: center;
+  }
+
+  .dashboard-grid {
+    position: static;
+    transform: none;
+    margin-top: 30px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width:768px){
+
+  .hero-title{
+    font-size:36px;
+  }
+
+  .hero-text{
+    font-size:16px;
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+  .primary,
+  .secondary{
+    width:100%;
+  }
+
+}
+/* Hero Animation */
+
+.hero-content {
+  animation: slideLeft 1.2s ease forwards;
+}
+
+.hero-image {
+  animation: slideRight 1.2s ease forwards;
+}
+
+
+/* Left content animation */
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Right image animation */
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Floating image effect */
+.hero-image img {
+  animation: floatImage 3s ease-in-out infinite;
+}
+
+
+@keyframes floatImage {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+/* Button hover animation */
+.hero-btn {
+  transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}

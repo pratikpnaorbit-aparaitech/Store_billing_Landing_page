@@ -1,46 +1,91 @@
-import { FaRupeeSign, FaShoppingCart, FaUsers } from "react-icons/fa";
+import "./Analytics.css";
+import {
+  FaChartLine,
+  FaUsers,
+  FaBoxes,
+  FaRupeeSign,
+} from "react-icons/fa";
 
 function Analytics() {
+  const stats = [
+    {
+      icon: <FaRupeeSign />,
+      number: "₹12.5L+",
+      title: "Monthly Sales",
+    },
+    {
+      icon: <FaUsers />,
+      number: "10K+",
+      title: "Happy Customers",
+    },
+    {
+      icon: <FaBoxes />,
+      number: "5K+",
+      title: "Products Managed",
+    },
+    {
+      icon: <FaChartLine />,
+      number: "99.9%",
+      title: "System Accuracy",
+    },
+  ];
+
   return (
     <section className="analytics">
+      <div className="analytics-container">
 
-      <div className="analytics-left">
+        <div className="analytics-content">
 
-        <span className="about-tag">Analytics</span>
+          <span className="analytics-tag">
+            📊 Analytics
+          </span>
 
-        <h2>Grow Your Business With Smart Analytics</h2>
+          <h2>
+            Grow Your Business with Smart Analytics
+          </h2>
 
-        <p>
-          Monitor your sales, customers, orders and revenue in one
-          powerful dashboard with real-time insights.
-        </p>
+          <p>
+            Get complete insights into your sales, inventory,
+            customers, profits and business performance with
+            easy-to-understand reports.
+          </p>
 
-        <button className="primary">View Dashboard</button>
+          <div className="analytics-stats">
+
+            {stats.map((item, index) => (
+
+              <div className="analytics-card" key={index}>
+
+                <div className="step-icon">
+                  {item.icon}
+                </div>
+
+                <h3>{item.number}</h3>
+
+                <p>{item.title}</p>
+
+              </div>
+
+            ))}
+
+          </div>
+
+          <a href="#pricing" className="analytics-btn">
+            View Pricing →
+          </a>
+
+        </div>
+
+        <div className="analytics-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
+            alt="Analytics Dashboard"
+          />
+
+        </div>
 
       </div>
-
-      <div className="analytics-right">
-
-        <div className="stats-card">
-          <FaRupeeSign className="stats-icon" />
-          <h3>₹5.4L</h3>
-          <p>Total Revenue</p>
-        </div>
-
-        <div className="stats-card">
-          <FaShoppingCart className="stats-icon" />
-          <h3>1,250</h3>
-          <p>Orders</p>
-        </div>
-
-        <div className="stats-card">
-          <FaUsers className="stats-icon" />
-          <h3>890</h3>
-          <p>Customers</p>
-        </div>
-
-      </div>
-
     </section>
   );
 }

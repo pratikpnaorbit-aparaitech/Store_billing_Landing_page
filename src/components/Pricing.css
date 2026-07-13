@@ -1,0 +1,161 @@
+.pricing {
+  padding: 100px 8%;
+  background: #f8fbff;
+  text-align: center;
+}
+
+.pricing-tag {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.pricing h2 {
+  font-size: 42px;
+  color: #1e293b;
+  margin-bottom: 15px;
+}
+
+.pricing-subtitle {
+  max-width: 650px;
+  margin: auto;
+  color: #64748b;
+  font-size: 17px;
+  margin-bottom: 60px;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+}
+
+.price-card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+  transition: 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-card:hover {
+  transform: translateY(-12px);
+}
+
+.price-card.popular {
+  border: 3px solid #2563eb;
+  transform: scale(1.05);
+}
+
+.price-card.popular:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 18px;
+  right: -35px;
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 45px;
+  transform: rotate(45deg);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.price-card h3 {
+  font-size: 28px;
+  color: #1e293b;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 48px;
+  color: #2563eb;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.price span {
+  font-size: 18px;
+  color: #64748b;
+}
+
+.price-desc {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.price-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 35px;
+}
+
+.price-features li {
+  padding: 12px 0;
+  color: #334155;
+  border-bottom: 1px solid #eee;
+}
+
+.price-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.price-btn:hover {
+  box-shadow: 0 12px 25px rgba(37,99,235,.35);
+  transform: translateY(-3px);
+}
+
+@media(max-width:992px){
+
+  .pricing h2{
+    font-size:34px;
+  }
+
+  .price-card.popular{
+    transform:scale(1);
+  }
+
+  .price-card.popular:hover{
+    transform:translateY(-10px);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .pricing{
+    padding:80px 5%;
+  }
+
+  .pricing h2{
+    font-size:28px;
+  }
+
+  .pricing-subtitle{
+    font-size:15px;
+  }
+
+  .price{
+    font-size:40px;
+  }
+
+}

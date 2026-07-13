@@ -1,69 +1,105 @@
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import "./Contact.css";
+import {
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+} from "react-icons/fa";
 
 function Contact() {
   return (
-    <section className="contact" id="contact">
-
-      <div className="section-title">
-        <h2>Contact Us</h2>
-        <p>We'd love to hear from you.</p>
-      </div>
-
+    <section id="contact" className="contact">
       <div className="contact-container">
 
-        <div className="contact-info">
+        {/* Left Side */}
+        <div className="contact-content">
 
-          <div className="info-box">
-            <FaMapMarkerAlt className="contact-icon" />
-            <div>
-              <h3>Address</h3>
-              <p>Pune, Maharashtra, India</p>
-            </div>
-          </div>
+          <span className="pricing-tag">
+            📞 Contact Us
+          </span>
 
-          <div className="info-box">
-            <FaPhoneAlt className="contact-icon" />
-            <div>
-              <h3>Phone</h3>
-              <p>+91 9876543210</p>
-            </div>
-          </div>
+          <h2>Let's Grow Your Business Together</h2>
 
-          <div className="info-box">
-            <FaEnvelope className="contact-icon" />
-            <div>
-              <h3>Email</h3>
-              <p>support@smartbilling.com</p>
+          <p>
+            Have questions about Smart Billing System?
+            Contact our team and we'll help you choose the
+            perfect solution for your business.
+          </p>
+
+          <div className="contact-info">
+
+            <div className="info-box">
+              <div className="info-icon">
+                <FaMapMarkerAlt />
+              </div>
+
+              <div>
+                <h4>Our Office</h4>
+                <p>Pune, Maharashtra, India</p>
+              </div>
             </div>
+
+            <div className="info-box">
+              <div className="info-icon">
+                <FaPhoneAlt />
+              </div>
+
+              <div>
+                <h4>Phone</h4>
+                <p>+91 98765 43210</p>
+              </div>
+            </div>
+
+            <div className="info-box">
+              <div className="info-icon">
+                <FaEnvelope />
+              </div>
+
+              <div>
+                <h4>Email</h4>
+                <p>support@smartbilling.com</p>
+              </div>
+            </div>
+
           </div>
 
         </div>
 
-        <form className="contact-form">
+        {/* Right Side Form */}
+        <div className="contact-form">
 
-          <input
-            type="text"
-            placeholder="Your Name"
-          />
+          <form>
 
-          <input
-            type="email"
-            placeholder="Your Email"
-          />
+            <input
+              type="text"
+              placeholder="Your Name"
+            />
 
-          <textarea
-            rows="6"
-            placeholder="Your Message"
-          ></textarea>
+            <input
+              type="email"
+              placeholder="Email Address"
+            />
 
-          <button type="submit">
-            Send Message
-          </button>
+            <input
+              type="text"
+              placeholder="Business Name"
+            />
 
-        </form>
+            <textarea
+              placeholder="Your Message"
+            ></textarea>
+
+            <button
+              type="submit"
+              className="contact-btn"
+            >
+              Send Message
+            </button>
+
+          </form>
+
+        </div>
 
       </div>
-
     </section>
   );
 }

@@ -1,59 +1,27 @@
-import { FaStar } from "react-icons/fa";
+import "./Testimonials.css";
 
 function Testimonials() {
   return (
     <section className="testimonials">
+      <div className="testimonial-container">
 
-      <div className="section-title">
         <h2>What Our Customers Say</h2>
-        <p>Trusted by hundreds of businesses across India.</p>
-      </div>
-
-      <div className="testimonial-grid">
 
         <div className="testimonial-card">
-          <div className="stars">
-            <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-          </div>
-
           <p>
-            Smart Billing has made our billing process faster and more
-            accurate. Highly recommended!
+            "This billing software made my business easier and faster."
           </p>
-
-          <h3>Rahul Patil</h3>
-          <span>Supermarket Owner</span>
+          <h4>Rahul Patil</h4>
         </div>
 
         <div className="testimonial-card">
-          <div className="stars">
-            <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-          </div>
-
           <p>
-            Inventory tracking and reports have helped us grow our
-            business efficiently.
+            "Easy to use and very helpful for daily billing."
           </p>
-
-          <h3>Priya Sharma</h3>
-          <span>Retail Store</span>
-        </div>
-
-        <div className="testimonial-card">
-          <div className="stars">
-            <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-          </div>
-
-          <p>
-            Easy to use, secure and saves us hours every day.
-          </p>
-
-          <h3>Amit Deshmukh</h3>
-          <span>Medical Shop</span>
+          <h4>Priya Sharma</h4>
         </div>
 
       </div>
-
     </section>
   );
 }
