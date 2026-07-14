@@ -1,12 +1,23 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./About.css";
 import { FaCheckCircle } from "react-icons/fa";
 
 function About() {
+  useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100,
+  });
+}, []);
   return (
     <section id="about" className="about">
       <div className="about-container">
 
-        <div className="about-image">
+        <div  className="about-image"
+  data-aos="fade-right">
           <img
             src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=700"
             alt="Smart Billing"
@@ -19,11 +30,15 @@ function About() {
             About Us
           </span>
 
-          <h2>
+          <h2 data-aos="fade-up">
             Simplify Your Business Billing with Smart Technology
           </h2>
 
-          <p>
+          <p
+  className="about-text"
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
             Smart Billing System is designed to help retailers,
             wholesalers, supermarkets and businesses manage
             billing, inventory, GST invoices and reports from

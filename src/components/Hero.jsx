@@ -11,13 +11,11 @@ function Hero() {
         </span>
 
         <h1 className="hero-title">
-          <TypeAnimation
-            sequence={["Smart Billing\nSystem", 3000]}
-            wrapper="span"
-            speed={40}
-            repeat={Infinity}
-            style={{ whiteSpace: "pre-line" }}
-          />
+          
+            Smart Billing System
+           
+            
+         
         </h1>
 
         <p className="hero-text">

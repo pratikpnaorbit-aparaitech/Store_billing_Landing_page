@@ -1,58 +1,220 @@
-.statistics{
-    padding:90px 8%;
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+.statistics {
+  position: relative;
+  padding: 110px 8%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #1d4ed8 100%);
 }
 
-.statistics-container{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:30px;
+/* Floating Background */
+
+.statistics::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  top: -180px;
+  left: -120px;
+  animation: float1 8s ease-in-out infinite;
 }
+
+.statistics::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  right: -100px;
+  bottom: -120px;
+  animation: float2 10s ease-in-out infinite;
+}
+
+@keyframes float1{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(40px);}
+  100%{transform:translateY(0);}
+}
+
+@keyframes float2{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-30px);}
+  100%{transform:translateY(0);}
+}
+
+.container{
+  position: relative;
+  z-index: 2;
+}
+
+.stats-tag{
+  display:inline-block;
+  padding:8px 20px;
+  border-radius:30px;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  margin-bottom:20px;
+}
+
+.stats-heading{
+  font-size:48px;
+  color:#fff;
+  text-align:center;
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+.stats-subtitle{
+  max-width:700px;
+  margin:0 auto 70px;
+  text-align:center;
+  color:rgba(255,255,255,.85);
+  line-height:1.8;
+  font-size:18px;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+}
+
+/* Cards */
 
 .stat-card{
-    background:rgba(255,255,255,.12);
-    backdrop-filter:blur(10px);
-    border-radius:20px;
-    padding:35px;
-    text-align:center;
-    color:#fff;
-    transition:.3s;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:45px 25px;
+  border-radius:25px;
+
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.15);
+
+  transition:.45s ease;
+  cursor:pointer;
+}
+
+/* Shine Effect */
+
+.stat-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:70%;
+  height:100%;
+
+  background:linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.45),
+      transparent
+  );
+
+  transform:skewX(-20deg);
+  transition:.8s;
+}
+
+.stat-card:hover::before{
+  left:150%;
 }
 
 .stat-card:hover{
-    transform:translateY(-10px);
-    background:rgba(255,255,255,.2);
+  transform:translateY(-15px) scale(1.05);
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
 }
+
+/* Icon */
 
 .stat-icon{
-    font-size:45px;
-    margin-bottom:20px;
+  width:90px;
+  height:90px;
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  font-size:34px;
+
+  transition:.5s;
 }
 
-.stat-card h2{
-    font-size:42px;
-    margin-bottom:10px;
+.stat-card:hover .stat-icon{
+  transform:rotateY(360deg) scale(1.15);
+  background:#fff;
+  color:#2563eb;
 }
+
+/* Number */
+
+.stat-card h3{
+  margin:28px 0 15px;
+  color:#fff;
+  font-size:52px;
+  font-weight:800;
+  transition:.3s;
+}
+
+.stat-card:hover h3{
+  transform:scale(1.08);
+}
+
+/* Text */
 
 .stat-card p{
-    font-size:18px;
-    color:#e2e8f0;
+  color:rgba(255,255,255,.9);
+  font-size:20px;
+  transition:.3s;
+}
+
+.stat-card:hover p{
+  letter-spacing:.5px;
+}
+
+/* Responsive */
+
+@media(max-width:1100px){
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
 }
 
 @media(max-width:768px){
 
 .statistics{
-    padding:70px 5%;
+padding:80px 6%;
 }
 
-.stat-card h2{
-    font-size:34px;
+.stats-heading{
+font-size:36px;
 }
 
-.stat-icon{
-    font-size:36px;
+.stats-subtitle{
+font-size:16px;
+}
+
+.stats-grid{
+grid-template-columns:1fr;
+}
+
+.stat-card{
+padding:35px 20px;
+}
+
+.stat-card h3{
+font-size:42px;
 }
 
 }

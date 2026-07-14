@@ -150,3 +150,28 @@
     text-align: center;
   }
 }
+.analytics-card{
+    transition:all .4s ease;
+    cursor:pointer;
+}
+
+.analytics-card:hover{
+    transform:translateY(-12px) scale(1.03);
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+}
+
+.analytics-icon{
+    transition:.5s;
+}
+
+.analytics-card:hover .analytics-icon{
+    transform:rotateY(180deg) scale(1.15);
+}
+
+.analytics-card h3{
+    transition:.4s;
+}
+
+.analytics-card:hover h3{
+    color:#4f46e5;
+}

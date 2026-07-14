@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Analytics.css";
 import {
   FaChartLine,
@@ -7,6 +10,13 @@ import {
 } from "react-icons/fa";
 
 function Analytics() {
+  useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100,
+  });
+}, []);
   const stats = [
     {
       icon: <FaRupeeSign />,
@@ -40,11 +50,14 @@ function Analytics() {
             📊 Analytics
           </span>
 
-          <h2>
+          <h2 data-aos="fade-up">
             Grow Your Business with Smart Analytics
           </h2>
 
-          <p>
+          <p 
+           className="analytics-text"
+  data-aos="fade-up"
+  data-aos-delay="200">
             Get complete insights into your sales, inventory,
             customers, profits and business performance with
             easy-to-understand reports.

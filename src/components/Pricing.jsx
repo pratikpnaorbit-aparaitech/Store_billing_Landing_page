@@ -1,75 +1,140 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Pricing.css";
 import { FaCheckCircle } from "react-icons/fa";
 
 function Pricing() {
-  const plans = [
-    {
-      title: "Basic",
-      price: "₹499",
-      duration: "/month",
-      description: "Perfect for small shops",
-      features: [
-        "GST Billing",
-        "Inventory Management",
-        "100 Customers",
-        "Sales Reports",
-      ],
-      popular: false,
-    },
-    {
-      title: "Professional",
-      price: "₹999",
-      duration: "/month",
-      description: "Best for growing businesses",
-      features: [
-        "Unlimited GST Billing",
-        "Inventory + Barcode",
-        "Unlimited Customers",
-        "Advanced Reports",
-        "Cloud Backup",
-        "Priority Support",
-      ],
-      popular: true,
-    },
-    {
-      title: "Enterprise",
-      price: "₹1999",
-      duration: "/month",
-      description: "For large businesses",
-      features: [
-        "Everything in Professional",
-        "Multi Branch",
-        "Employee Management",
-        "Custom Reports",
-        "API Access",
-        "24×7 Premium Support",
-      ],
-      popular: false,
-    },
-  ];
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
+const plans = [
+  {
+    title: "Free",
+    price: "₹0",
+    duration: "/month",
+    description: "Perfect for beginners",
+    features: [
+      "GST Billing",
+      "50 Products",
+      "50 Customers",
+      "Basic Reports",
+    ],
+    popular: false,
+  },
+
+  {
+    title: "Standard",
+    price: "₹749",
+    duration: "/month",
+    description: "Best for small businesses",
+    features: [
+      "Unlimited Billing",
+      "Inventory Management",
+      "Barcode Support",
+      "Sales Reports",
+      "1000 Customers",
+    ],
+    popular: false,
+  },
+
+  {
+    title: "Professional",
+    price: "₹1499",
+    duration: "/month",
+    description: "Most Popular Plan",
+    features: [
+      "Everything in Standard",
+      "Cloud Backup",
+      "Advanced Reports",
+      "Unlimited Customers",
+      "Priority Support",
+    ],
+    popular: true,
+  },
+
+  {
+    title: "Premium",
+    price: "₹2999",
+    duration: "/month",
+    description: "For growing businesses",
+    features: [
+      "Everything in Professional",
+      "Multi Branch",
+      "Employee Management",
+      "Analytics Dashboard",
+      "WhatsApp Invoice",
+    ],
+    popular: false,
+  },
+
+  {
+    title: "Elite",
+    price: "₹4999",
+    duration: "/month",
+    description: "Advanced business solution",
+    features: [
+      "Everything in Premium",
+      "Custom Reports",
+      "Role Management",
+      "API Access",
+      "Dedicated Support",
+    ],
+    popular: false,
+  },
+
+  {
+    title: "Ultimate",
+    price: "₹7999",
+    duration: "/month",
+    description: "Complete enterprise solution",
+    features: [
+      "Unlimited Everything",
+      "Multi Company",
+      "AI Reports",
+      "Custom Integrations",
+      "24×7 Premium Support",
+    ],
+    popular: false,
+  },
+];
+  
 
   return (
     <section id="pricing" className="pricing">
-
-      <span className="pricing-tag">
+      <span
+        className="pricing-tag"
+        data-aos="fade-down"
+      >
         💳 Pricing Plans
       </span>
 
-      <h2>Choose the Perfect Plan</h2>
+      <h2 data-aos="fade-up">
+        Choose the Perfect Plan
+      </h2>
 
-      <p className="pricing-subtitle">
-        Flexible pricing for every business. Upgrade anytime as your business grows.
+      <p
+        className="pricing-subtitle"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        Flexible pricing for every business. Upgrade anytime as your
+        business grows.
       </p>
 
       <div className="pricing-container">
-
         {plans.map((plan, index) => (
-
           <div
             key={index}
             className={plan.popular ? "price-card popular" : "price-card"}
+            data-aos={plan.popular ? "zoom-in" : "flip-left"}
+            data-aos-delay={index * 200}
           >
-
             {plan.popular && (
               <div className="popular-badge">
                 Most Popular
@@ -88,27 +153,21 @@ function Pricing() {
             </p>
 
             <ul className="price-features">
-
               {plan.features.map((feature, i) => (
-
                 <li key={i}>
-                  <FaCheckCircle color="#22c55e" /> {feature}
+                  <FaCheckCircle color="#22c55e" />
+                  {" "}
+                  {feature}
                 </li>
-
               ))}
-
             </ul>
 
             <a href="#contact" className="price-btn">
               Get Started
             </a>
-
           </div>
-
         ))}
-
       </div>
-
     </section>
   );
 }
