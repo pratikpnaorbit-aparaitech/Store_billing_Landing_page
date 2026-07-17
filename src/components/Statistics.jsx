@@ -27,7 +27,7 @@ function Statistics() {
     },
     {
       icon: <FaFileInvoiceDollar />,
-      number: 5000000,
+      number: 500000,
       suffix: "+",
       title: "Invoices Generated",
     },
@@ -55,7 +55,7 @@ function Statistics() {
           className="stats-tag"
           data-aos="fade-down"
         >
-          📊 Statistics
+        
         </span>
 
         <h2

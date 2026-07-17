@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({ onLogin }) {
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 50);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   return (
-    <nav className="navbar">
+   <nav className={scrolled ? "navbar scrolled" : "navbar"}>
       <div className="nav-container">
 
         {/* Logo */}
@@ -16,6 +29,7 @@ function Navbar() {
 
         {/* Navigation Links */}
         <ul className={menu ? "nav-links active" : "nav-links"}>
+
           <li>
             <a href="#home" onClick={() => setMenu(false)}>
               Home
@@ -45,15 +59,25 @@ function Navbar() {
               Contact
             </a>
           </li>
+
         </ul>
 
-        {/* Button */}
-        <button className="nav-btn">
+        {/* Get Started */}
+        <button
+          className="nav-btn"
+          onClick={() => {
+            setMenu(false);
+            onLogin();
+          }}
+        >
           Get Started
         </button>
 
-        {/* Mobile Menu Icon */}
-        <div className="menu-icon" onClick={() => setMenu(!menu)}>
+        {/* Mobile Menu */}
+        <div
+          className="menu-icon"
+          onClick={() => setMenu(!menu)}
+        >
           {menu ? <FaTimes /> : <FaBars />}
         </div>
 
