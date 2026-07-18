@@ -92,9 +92,9 @@ function Analytics() {
         <div className="analytics-image">
 
           <img
-            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
-            alt="Analytics Dashboard"
-          />
+  src="https://images.openai.com/static-rsc-4/yS8pf6Y-9IGiJy3qjhmRjYpqmPsYbDMpBLys15H66PKlzMAMZsu4hOBroI1JtbGX5_MXv8RnX7sQWxS6PkxlzygjeQW0bx8_GECkoFH39dO7VxbXiwbjBo-lS1X3rfNNislUvGXETePtXZuhYE_CHK7kZI190I-i_SjRyC_mPAqI2p0rYwz2oFtSetsP2fF7?purpose=fullsize"
+  alt="Analytics Dashboard"
+/>
 
         </div>
 

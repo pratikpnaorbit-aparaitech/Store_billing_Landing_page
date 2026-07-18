@@ -225,3 +225,242 @@
     margin-top: 40px;
   }
 }
+.legal-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legal-links a {
+  color: #64748b;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  transition: 0.3s;
+}
+
+.legal-links a:hover {
+  color: #818cf8;
+}
+
+.legal-links span {
+  color: #334155;
+}
+/* ============================= */
+/* TERMS & CONDITIONS POPUP */
+/* ============================= */
+
+.terms-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(15, 23, 42, 0.72);
+
+  backdrop-filter: blur(8px);
+
+  animation: termsFade 0.3s ease;
+}
+
+.terms-modal {
+  position: relative;
+
+  width: 620px;
+  max-width: 100%;
+
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+  padding: 38px;
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #f8fafc
+  );
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.25);
+
+  animation: termsPopup 0.35s ease;
+}
+
+/* Close Button */
+
+.terms-close {
+  position: absolute;
+
+  top: 18px;
+  right: 20px;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  font-size: 25px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.terms-close:hover {
+  background: #4f46e5;
+
+  color: white;
+
+  transform: rotate(90deg);
+}
+
+/* Logo */
+
+.terms-logo {
+  margin-bottom: 12px;
+
+  color: #1e293b;
+
+  font-size: 24px;
+
+  font-weight: 700;
+}
+
+.terms-logo span {
+  color: #4f46e5;
+}
+
+/* Heading */
+
+.terms-modal h2 {
+  margin: 0 0 8px;
+
+  color: #1e293b;
+
+  font-size: 32px;
+}
+
+.terms-intro {
+  margin-bottom: 28px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+/* Content */
+
+.terms-content {
+  padding-right: 8px;
+}
+
+.terms-content h3 {
+  margin-top: 22px;
+  margin-bottom: 8px;
+
+  color: #1e293b;
+
+  font-size: 17px;
+}
+
+.terms-content p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* Button */
+
+.terms-btn {
+  width: 100%;
+
+  margin-top: 30px;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #4f46e5;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.terms-btn:hover {
+  background: #3730a3;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+}
+
+/* Animations */
+
+@keyframes termsFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes termsPopup {
+  from {
+    opacity: 0;
+
+    transform: scale(0.88) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .terms-modal {
+    padding: 28px 22px;
+
+    border-radius: 18px;
+  }
+
+  .terms-modal h2 {
+    font-size: 26px;
+  }
+}
