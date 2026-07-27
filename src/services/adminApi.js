@@ -29,3 +29,24 @@ export const fetchAdminDashboard = (token, { search = "", status = "all" } = {})
     headers: { authorization: `Bearer ${token}` },
   });
 };
+
+export const fetchAdminPlans = (token) => request("/admin/plans", {
+  headers: { authorization: `Bearer ${token}` },
+});
+
+export const updateAdminPlan = (token, durationMonths, amount) => request(`/admin/plans/${durationMonths}`, {
+  method: "PATCH",
+  headers: { authorization: `Bearer ${token}` },
+  body: JSON.stringify({ amount }),
+});
+
+export const extendUserTrial = (token, userId, days) => request(`/admin/users/${userId}/trial`, {
+  method: "PATCH",
+  headers: { authorization: `Bearer ${token}` },
+  body: JSON.stringify({ days }),
+});
+
+export const forceLogoutUser = (token, userId) => request(`/admin/users/${userId}/force-logout`, {
+  method: "POST",
+  headers: { authorization: `Bearer ${token}` },
+});
