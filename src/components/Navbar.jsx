@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-function Navbar({ onLogin }) {
+function Navbar({ onAdmin }) {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -59,18 +59,23 @@ useEffect(() => {
               Contact
             </a>
           </li>
+          <li className="mobile-admin-link">
+            <button onClick={() => { setMenu(false); onAdmin(); }}>
+              Admin Panel
+            </button>
+          </li>
 
         </ul>
 
-        {/* Get Started */}
+        {/* Admin Panel */}
         <button
           className="nav-btn"
           onClick={() => {
             setMenu(false);
-            onLogin();
+            onAdmin();
           }}
         >
-          Get Started
+          Admin Panel
         </button>
 
         {/* Mobile Menu */}
