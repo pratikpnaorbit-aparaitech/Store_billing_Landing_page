@@ -11,51 +11,65 @@ import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import AdminLogin from "./components/AdminLogin";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
-  const [authMode, setAuthMode] = useState(null);
+  const rememberedToken = localStorage.getItem("SMART_BILLING_ADMIN_TOKEN");
+  const sessionToken = sessionStorage.getItem("SMART_BILLING_ADMIN_TOKEN");
+  const [adminSession, setAdminSession] = useState(() => {
+    const token = rememberedToken || sessionToken;
+    const email = localStorage.getItem("SMART_BILLING_ADMIN_EMAIL")
+      || sessionStorage.getItem("SMART_BILLING_ADMIN_EMAIL")
+      || "";
+    return token ? { token, email } : null;
+  });
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+
+  const openPricing = () => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
+  const authenticateAdmin = (session, remember) => {
+    const storage = remember ? localStorage : sessionStorage;
+    localStorage.removeItem("SMART_BILLING_ADMIN_TOKEN");
+    localStorage.removeItem("SMART_BILLING_ADMIN_EMAIL");
+    sessionStorage.removeItem("SMART_BILLING_ADMIN_TOKEN");
+    sessionStorage.removeItem("SMART_BILLING_ADMIN_EMAIL");
+    storage.setItem("SMART_BILLING_ADMIN_TOKEN", session.token);
+    storage.setItem("SMART_BILLING_ADMIN_EMAIL", session.admin.email);
+    setAdminSession({ token: session.token, email: session.admin.email });
+    setShowAdminLogin(false);
+  };
+  const logoutAdmin = () => {
+    localStorage.removeItem("SMART_BILLING_ADMIN_TOKEN");
+    localStorage.removeItem("SMART_BILLING_ADMIN_EMAIL");
+    sessionStorage.removeItem("SMART_BILLING_ADMIN_TOKEN");
+    sessionStorage.removeItem("SMART_BILLING_ADMIN_EMAIL");
+    setAdminSession(null);
+  };
+
+  if (adminSession) {
+    return <AdminDashboard token={adminSession.token} adminEmail={adminSession.email} onLogout={logoutAdmin} />;
+  }
 
   return (
     <>
       <Navbar
-  onLogin={() => setAuthMode("login")}
-/>
+        onAdmin={() => setShowAdminLogin(true)}
+      />
 
       <Hero
-        onLogin={() => setAuthMode("login")}
+        onLogin={openPricing}
       />
 
       <Features />
       <About />
       <Analytics />
       <Statistics />
-      <Pricing />
+      <Pricing onGetStarted={openPricing} />
       <Testimonials />
       <Contact />
       <Footer />
 
-      {authMode && (
-        <div
-          className="login-overlay"
-          onClick={() => setAuthMode(null)}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-          >
-            {authMode === "login" ? (
-              <Login
-                onSignup={() => setAuthMode("signup")}
-              />
-            ) : (
-              <Signup
-                onLogin={() => setAuthMode("login")}
-              />
-            )}
-          </div>
-        </div>
-      )}
+      {showAdminLogin && <AdminLogin onAuthenticated={authenticateAdmin} onClose={() => setShowAdminLogin(false)} />}
     </>
   );
 }
