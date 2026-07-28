@@ -50,3 +50,9 @@ export const forceLogoutUser = (token, userId) => request(`/admin/users/${userId
   method: "POST",
   headers: { authorization: `Bearer ${token}` },
 });
+
+export const setUserAccountAccess = (token, userId, paused, reason = "") => request(`/admin/users/${userId}/access`, {
+  method: "PATCH",
+  headers: { authorization: `Bearer ${token}` },
+  body: JSON.stringify({ paused, reason }),
+});

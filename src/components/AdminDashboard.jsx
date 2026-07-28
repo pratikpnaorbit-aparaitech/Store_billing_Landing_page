@@ -16,6 +16,7 @@ import {
   fetchAdminDashboard,
   fetchAdminPlans,
   forceLogoutUser,
+  setUserAccountAccess,
   updateAdminPlan,
 } from "../services/adminApi";
 import "./AdminDashboard.css";
@@ -99,6 +100,7 @@ function UserTable({
   allowTrialExtension,
   onExtendTrial,
   onForceLogout,
+  onSetAccountAccess,
   actionBusy,
 }) {
   return (
@@ -132,7 +134,7 @@ function UserTable({
           </thead>
           <tbody>
             {users.map((user) => {
-              const shownStatus = user.subscription.status;
+              const shownStatus = user.accountAccess?.paused ? "admin_paused" : user.subscription.status;
               const isBusy = actionBusy === user.id;
               return (
                 <tr key={user.id}>
@@ -156,8 +158,11 @@ function UserTable({
                   </td>
                   <td>
                     <span className={`status-pill ${statusClass(shownStatus)}`}>
-                      {STATUS_LABELS[shownStatus] || shownStatus}
+                      {user.accountAccess?.paused ? "Admin paused" : (STATUS_LABELS[shownStatus] || shownStatus)}
                     </span>
+                    {user.accountAccess?.paused
+                      ? <small>{user.accountAccess.pauseReason || "Paused by administrator"}</small>
+                      : null}
                     {user.subscription.providerStatus !== shownStatus
                       ? <small>Razorpay: {STATUS_LABELS[user.subscription.providerStatus] || user.subscription.providerStatus}</small>
                       : null}
@@ -173,6 +178,13 @@ function UserTable({
                         ? `Period ends ${formatDate(user.subscription.currentPeriodEnd)}`
                         : "No paid period"}
                     </small>
+                    {user.subscription.priceChange?.required ? (
+                      <span className="price-change-note">
+                        Price update: ₹{Number(user.subscription.priceChange.currentPlan?.amount || 0).toLocaleString("en-IN")}
+                        {" → "}
+                        ₹{Number(user.subscription.priceChange.latestPlan?.amount || 0).toLocaleString("en-IN")}
+                      </span>
+                    ) : null}
                   </td>
                   <td>
                     <strong>{user.deviceSession?.active ? user.deviceSession.deviceName : "No active phone"}</strong>
@@ -190,6 +202,13 @@ function UserTable({
                           Force logout
                         </button>
                       ) : null}
+                      <button
+                        className={user.accountAccess?.paused ? "action-primary" : "action-danger"}
+                        onClick={() => onSetAccountAccess(user)}
+                        disabled={isBusy}
+                      >
+                        {user.accountAccess?.paused ? "Resume account" : "Pause account"}
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -264,6 +283,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
     { label: "Registered users", value: data.summary.totalUsers, icon: <FaUsers />, tone: "blue", page: "overview" },
     { label: "Trials running", value: data.summary.trialActive, icon: <FaClock />, tone: "amber", page: "trials" },
     { label: "Active subscriptions", value: data.summary.activeSubscriptions, icon: <FaCalendarCheck />, tone: "green", page: "subscribed" },
+    { label: "Price updates pending", value: data.summary.priceUpdatesPending || 0, icon: <FaTriangleExclamation />, tone: "amber", page: "subscribed" },
     { label: "Monthly equivalent", value: `₹${data.summary.monthlyRecurringRevenue.toLocaleString("en-IN")}`, icon: <FaIndianRupeeSign />, tone: "purple", page: "payments" },
     { label: "Trials ended", value: data.summary.trialExpired, icon: <FaTriangleExclamation />, tone: "red", page: "expired" },
   ] : [], [data]);
@@ -314,6 +334,34 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
     }
   };
 
+  const setAccountAccess = async (user) => {
+    const shouldPause = !user.accountAccess?.paused;
+    let reason = "";
+    if (shouldPause) {
+      reason = window.prompt(
+        `Why should ${user.name}'s account be paused?`,
+        user.subscription.priceChange?.required
+          ? "Subscription price update is pending"
+          : "Paused by administrator",
+      );
+      if (reason === null) return;
+    } else if (!window.confirm(`Resume app access for ${user.name}?`)) {
+      return;
+    }
+    setActionBusy(user.id);
+    setError("");
+    setNotice("");
+    try {
+      const result = await setUserAccountAccess(token, user.id, shouldPause, reason);
+      setNotice(result.message);
+      await load(true);
+    } catch (requestError) {
+      handleRequestError(requestError);
+    } finally {
+      setActionBusy("");
+    }
+  };
+
   const savePlan = async (plan) => {
     const amount = Number(planDrafts[plan.durationMonths]);
     if (!Number.isFinite(amount) || amount < 1) {
@@ -321,7 +369,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
       return;
     }
     const accepted = window.confirm(
-      `Publish ₹${amount.toLocaleString("en-IN")} for the ${plan.durationMonths} month plan?\n\nThis affects only new subscriptions. Existing autopay amounts stay unchanged.`,
+      `Publish ₹${amount.toLocaleString("en-IN")} for the ${plan.durationMonths} month plan?\n\nExisting autopay amounts stay unchanged. Affected subscribers will receive an in-app update notice.`,
     );
     if (!accepted) return;
     setActionBusy(`plan-${plan.durationMonths}`);
@@ -430,6 +478,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
                 allowTrialExtension
                 onExtendTrial={extendTrial}
                 onForceLogout={forceLogout}
+                onSetAccountAccess={setAccountAccess}
                 actionBusy={actionBusy}
               />
             ) : null}
@@ -443,6 +492,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
                 setSearch={setSearch}
                 onExtendTrial={extendTrial}
                 onForceLogout={forceLogout}
+                onSetAccountAccess={setAccountAccess}
                 actionBusy={actionBusy}
               />
             ) : null}
@@ -457,6 +507,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
                 allowTrialExtension
                 onExtendTrial={extendTrial}
                 onForceLogout={forceLogout}
+                onSetAccountAccess={setAccountAccess}
                 actionBusy={actionBusy}
               />
             ) : null}
@@ -493,8 +544,8 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
                 <div className="plan-warning">
                   <FaShieldHalved />
                   <div>
-                    <strong>Existing autopay is protected</strong>
-                    <p>Saving a price creates a new immutable Razorpay plan version. It never changes the amount already authorised by an existing subscriber.</p>
+                    <strong>Existing autopay stays protected</strong>
+                    <p>Saving creates a new immutable Razorpay plan. Existing subscribers keep their authorised amount, receive an app notice and can safely migrate to the latest plan.</p>
                   </div>
                 </div>
               </section>
