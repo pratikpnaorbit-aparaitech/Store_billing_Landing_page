@@ -37,7 +37,7 @@
 .admin-live { display: flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 999px; color: #15803d; background: #dcfce7; font-size: 12px; font-weight: 800; }
 .admin-live i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14); }
 
-.admin-summary { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin: 30px 0 24px; }
+.admin-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 30px 0 24px; }
 .summary-card { min-width: 0; display: flex; align-items: center; gap: 13px; padding: 18px; border: 1px solid #e2e8f0; border-radius: 18px; background: #fff; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04); font: inherit; text-align: left; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
 .summary-card:hover { transform: translateY(-2px); box-shadow: 0 13px 30px rgba(15, 23, 42, 0.08); }
 .summary-icon { flex: 0 0 43px; height: 43px; display: grid; place-items: center; border-radius: 14px; }
@@ -46,7 +46,7 @@
 .summary-card.green .summary-icon { color: #15803d; background: #dcfce7; }
 .summary-card.purple .summary-icon { color: #7e22ce; background: #f3e8ff; }
 .summary-card.red .summary-icon { color: #b91c1c; background: #fee2e2; }
-.summary-card span { display: block; overflow: hidden; color: #64748b; font-size: 11px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.summary-card span { display: block; color: #64748b; font-size: 11px; font-weight: 700; line-height: 1.25; }
 .summary-card strong { display: block; margin-top: 4px; font-size: 23px; }
 
 .admin-panel { margin-top: 22px; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 20px; background: #fff; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); scroll-margin-top: 22px; }
@@ -80,6 +80,8 @@
 .admin-row-actions button:disabled { opacity: .55; cursor: wait; }
 .action-primary { border: 0; color: #fff; background: #2563eb; }
 .action-secondary { border: 1px solid #cbd5e1; color: #334155; background: #fff; }
+.action-danger { border: 1px solid #fecaca; color: #dc2626; background: #fff; }
+.price-change-note { display: inline-flex; margin-top: 8px; border-radius: 999px; padding: 5px 9px; background: #fff7ed; color: #9a3412; font-size: 11px; font-weight: 800; }
 
 .overview-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; padding: 22px; }
 .overview-links button { min-height: 150px; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 17px; color: #2563eb; background: #f8fafc; font: inherit; text-align: left; cursor: pointer; }
@@ -130,7 +132,8 @@
   .admin-main { padding: 24px 16px 45px; }
   .admin-topbar { display: block; }
   .admin-header-actions { margin-top: 18px; }
-  .admin-mobile-nav { display: flex; gap: 8px; margin: 22px -2px 0; padding: 2px 2px 8px; overflow-x: auto; }
+  .admin-mobile-nav { display: flex; gap: 8px; margin: 22px -2px 0; padding: 2px 2px 8px; overflow-x: auto; scrollbar-width: none; }
+  .admin-mobile-nav::-webkit-scrollbar { display: none; }
   .admin-mobile-nav button { flex: 0 0 auto; padding: 9px 12px; border: 1px solid #dbe3ef; border-radius: 999px; color: #475569; background: #fff; font: inherit; font-size: 11px; font-weight: 800; }
   .admin-mobile-nav button.active { border-color: #2563eb; color: #fff; background: #2563eb; }
   .admin-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
