@@ -4,6 +4,7 @@ import {
   FaCalendarCheck,
   FaClock,
   FaIndianRupeeSign,
+  FaPause,
   FaMagnifyingGlass,
   FaRotate,
   FaShieldHalved,
@@ -33,6 +34,7 @@ const STATUS_LABELS = {
   expired: "Expired",
   created: "Checkout pending",
   trialing: "Free trial",
+  admin_paused: "Admin paused",
 };
 
 const PAGE_DETAILS = {
@@ -49,7 +51,12 @@ const PAGE_DETAILS = {
   subscribed: {
     kicker: "PAID CUSTOMERS",
     title: "Subscribed users",
-    description: "Users with an active or already-paid Razorpay subscription period.",
+    description: "Active paid users whose app access is currently enabled.",
+  },
+  paused: {
+    kicker: "ADMIN-PAUSED ACCOUNTS",
+    title: "Paused subscribers",
+    description: "Paid accounts paused by an administrator. Resume access to move them back to Subscribed users.",
   },
   expired: {
     kicker: "TRIAL ENDED",
@@ -70,7 +77,8 @@ const PAGE_DETAILS = {
 
 const USER_PAGE_STATUS = {
   trials: "trial_active",
-  subscribed: "active",
+  subscribed: "active_unpaused",
+  paused: "admin_paused",
   expired: "trial_expired",
 };
 
@@ -87,7 +95,7 @@ function formatDate(value, withTime = true) {
 function statusClass(status) {
   if (status === "active") return "good";
   if (status === "trial_active" || status === "trialing") return "trial";
-  if (["pending", "halted"].includes(status)) return "warning";
+  if (["pending", "halted", "admin_paused"].includes(status)) return "warning";
   return "muted";
 }
 
@@ -282,7 +290,14 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
   const summaryCards = useMemo(() => data ? [
     { label: "Registered users", value: data.summary.totalUsers, icon: <FaUsers />, tone: "blue", page: "overview" },
     { label: "Trials running", value: data.summary.trialActive, icon: <FaClock />, tone: "amber", page: "trials" },
-    { label: "Active subscriptions", value: data.summary.activeSubscriptions, icon: <FaCalendarCheck />, tone: "green", page: "subscribed" },
+    {
+      label: "Active subscriptions",
+      value: data.summary.activeUnpausedSubscriptions ?? data.summary.activeSubscriptions,
+      icon: <FaCalendarCheck />,
+      tone: "green",
+      page: "subscribed",
+    },
+    { label: "Admin-paused accounts", value: data.summary.pausedAccounts || 0, icon: <FaPause />, tone: "red", page: "paused" },
     { label: "Price updates pending", value: data.summary.priceUpdatesPending || 0, icon: <FaTriangleExclamation />, tone: "amber", page: "subscribed" },
     { label: "Monthly equivalent", value: `₹${data.summary.monthlyRecurringRevenue.toLocaleString("en-IN")}`, icon: <FaIndianRupeeSign />, tone: "purple", page: "payments" },
     { label: "Trials ended", value: data.summary.trialExpired, icon: <FaTriangleExclamation />, tone: "red", page: "expired" },
@@ -353,7 +368,9 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
     setNotice("");
     try {
       const result = await setUserAccountAccess(token, user.id, shouldPause, reason);
-      setNotice(result.message);
+      setNotice(shouldPause
+        ? `${result.message} The account is now listed under Paused accounts.`
+        : `${result.message} The account has moved back to Subscribed users.`);
       await load(true);
     } catch (requestError) {
       handleRequestError(requestError);
@@ -394,6 +411,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
     ["overview", <FaStore key="overview" />, "Overview"],
     ["trials", <FaClock key="trials" />, "Active trials"],
     ["subscribed", <FaCalendarCheck key="subscribed" />, "Subscribed"],
+    ["paused", <FaPause key="paused" />, "Paused accounts"],
     ["expired", <FaTriangleExclamation key="expired" />, "Trial ended"],
     ["plans", <FaIndianRupeeSign key="plans" />, "Plan prices"],
     ["payments", <FaUsers key="payments" />, "Payments"],
@@ -461,6 +479,7 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
                   <div className="overview-links">
                     <button onClick={() => switchPage("trials")}><FaClock /><strong>Active trials</strong><span>Extend trial days per user</span></button>
                     <button onClick={() => switchPage("subscribed")}><FaCalendarCheck /><strong>Subscribed users</strong><span>See plan and renewal details</span></button>
+                    <button onClick={() => switchPage("paused")}><FaPause /><strong>Paused accounts</strong><span>Resume paid users when access can continue</span></button>
                     <button onClick={() => switchPage("expired")}><FaTriangleExclamation /><strong>Expired trials</strong><span>Restore selected users</span></button>
                     <button onClick={() => switchPage("plans")}><FaIndianRupeeSign /><strong>Plan prices</strong><span>Control 1, 3 and 6 month pricing</span></button>
                   </div>
@@ -488,6 +507,20 @@ function AdminDashboard({ token, adminEmail, onLogout }) {
                 users={data.users}
                 title="Active paid subscriptions"
                 description="Existing users retain the plan price they authorised in Razorpay."
+                search={search}
+                setSearch={setSearch}
+                onExtendTrial={extendTrial}
+                onForceLogout={forceLogout}
+                onSetAccountAccess={setAccountAccess}
+                actionBusy={actionBusy}
+              />
+            ) : null}
+
+            {page === "paused" ? (
+              <UserTable
+                users={data.users}
+                title="Accounts paused by administrator"
+                description="Resume any account below to restore app access and return it to the Subscribed users page."
                 search={search}
                 setSearch={setSearch}
                 onExtendTrial={extendTrial}
